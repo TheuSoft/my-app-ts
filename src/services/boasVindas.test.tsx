@@ -1,11 +1,17 @@
-import { boasVindas } from "../services/boasVindas";
+import { login } from "./login";
 
-describe("boasVindas", () => {
-  it("deve retornar mensagem com nome informado", () => {
-    expect(boasVindas("Matheus")).toBe("Seja bem-vindo(a), Matheus!");
-  });
+describe("login", () => {
+  const mockAlert = jest.fn();
+  window.alert = mockAlert;
 
-  it("deve usar 'usuário' quando nome vier vazio", () => {
-    expect(boasVindas("   ")).toBe("Seja bem-vindo(a), usuário!");
+  const mockEmail = "matheu@hotmail.com";
+  it ("deve exibir um alerta de boas-vindas caso o email seja válido", async () => {
+    await login(mockEmail);
+    expect(mockAlert).toHaveBeenCalledWith(`Login realizado ${mockEmail}!`);
+  })
+
+  it('Deve exibir um erro caso o email seja inválido', async () => {
+    await login('email@invalido.com');
+    expect(mockAlert).toHaveBeenCalledWith('Email inválido!');
   });
 });

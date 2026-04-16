@@ -1,27 +1,14 @@
 import { Button } from "@chakra-ui/react";
-import type { MouseEventHandler, ReactNode } from "react";
+import type { MouseEventHandler} from "react";
 
-type AppButtonProps = {
-  children: ReactNode;
-  onClick?: MouseEventHandler<HTMLButtonElement>;
-  type?: "button" | "submit" | "reset";
-};
+interface IDButton{
+  onClick: MouseEventHandler
+}
 
-export function AppButton({
-  children,
-  onClick,
-  type = "button",
-}: AppButtonProps) {
+export const AppButton = ({onClick }: IDButton) => {
   return (
-    <Button
-      type={type}
-      onClick={onClick}
-      colorPalette="blue"
-      size="lg"
-      width="100%"
-      mt="15px"
-    >
-      {children}
+    <Button colorScheme="blue" onClick={onClick}>
+      Entrar
     </Button>
   );
 }
