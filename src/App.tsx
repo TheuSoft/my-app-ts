@@ -4,6 +4,7 @@ import Conta from "./pages/Conta";
 import { Header } from "./components/Header/Header";
 import { Provider } from "./components/ui/provider";
 import ContaInfo from "./pages/ContaInfo";
+import { AppContextProvider } from "./components/AppContext/AppContext";
 // // Componente de estilo usando styled-components
 // const Box = styled.div`
 //   background-color: orange;
@@ -12,14 +13,16 @@ import ContaInfo from "./pages/ContaInfo";
 function App() {
   return (
     <BrowserRouter>
-      <Provider>
-        <Header />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/conta/:id" element={<Conta />} />
-          <Route path="/conta-info" element={<ContaInfo />} />
-        </Routes>
-      </Provider>
+      <AppContextProvider>
+        <Provider>
+          <Header />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/conta/:id" element={<Conta />} />
+            <Route path="/conta-info" element={<ContaInfo />} />
+          </Routes>
+        </Provider>
+      </AppContextProvider>
     </BrowserRouter>
   );
 }

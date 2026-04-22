@@ -1,8 +1,12 @@
 import { Flex, Heading } from "@chakra-ui/react";
 import { Image } from "@chakra-ui/react";
+import { useContext } from "react";
 import logo from "src/logo.png";
+import { AppContext } from "../AppContext/AppContext";
 
 export const Header = () => {
+  const context = useContext(AppContext);
+  console.log(context);
   return (
     <Flex
       as="header"
