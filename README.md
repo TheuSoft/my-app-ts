@@ -1,46 +1,99 @@
-# Getting Started with Create React App
+# My App TS
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Aplicacao em React + TypeScript com autenticacao, Context API, persistencia de sessao em localStorage e rotas protegidas.
 
-## Available Scripts
+## Objetivo
 
-In the project directory, you can run:
+Este projeto foi desenvolvido para praticar:
 
-### `npm start`
+- Autenticacao de usuario no front-end
+- Estado global com Context API
+- Persistencia de sessao com localStorage
+- Protecao de paginas privadas com React Router
+- Organizacao por camadas (pages, components, services)
+- Testes unitarios de regras de negocio
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Funcionalidades
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- Login com validacao de email e senha
+- Logout com limpeza da sessao
+- Botao de logout exibido somente quando o usuario esta logado
+- Sessao persistida no localStorage (nao perde ao recarregar a pagina)
+- Redirecionamento automatico para area logada quando ja existe sessao
+- Rotas privadas para paginas protegidas
+- Pagina de informacoes da usuaria (nome e email)
 
-### `npm test`
+## Fluxo da autenticacao
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. Usuaria informa email e senha na tela de login.
+2. O service valida as credenciais.
+3. Em caso de sucesso:
 
-### `npm run build`
+- Context API salva estado global
+- Dados sao persistidos no localStorage
+- Navegacao para pagina protegida
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+4. Em caso de logout:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- Estado global e limpo
+- localStorage e limpo
+- Navegacao para pagina inicial
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Beneficios no estudo
 
-### `npm run eject`
+- Entendimento pratico de async/await e Promise
+- Diferenca entre estado local e estado global
+- Como separar regras de negocio (services) da interface (pages/components)
+- Como manter sessao entre reloads
+- Base para evoluir para autenticacao com backend real (JWT/API)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Tecnologias e bibliotecas utilizadas
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- React
+- TypeScript
+- React Router DOM
+- Chakra UI
+- Emotion React
+- Styled Components
+- Next Themes
+- React Icons
+- Jest
+- Testing Library (react, jest-dom, user-event, dom)
+- Prettier
+- ESLint Config Prettier
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Scripts disponiveis
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+No diretorio do projeto:
 
-## Learn More
+- `npm start`
+  Inicia o app em modo de desenvolvimento.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- `npm test`
+  Executa os testes em modo interativo.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- `npm run build`
+  Gera a versao de producao na pasta build.
+
+## Credenciais de teste
+
+- Email: matheu@hotmail.com
+- Senha: 123456
+
+## Estrutura principal
+
+- `src/components`
+  Componentes visuais e contexto global
+
+- `src/pages`
+  Paginas da aplicacao (login, conta, dados da usuaria)
+
+- `src/services`
+  Regras de autenticacao e manipulacao de storage
+
+## Proximos passos sugeridos
+
+1. Adicionar feedback visual de erro sem alert
+2. Cobrir mais cenarios com testes de contexto e rotas privadas
+3. Integrar com API real para autenticacao
+4. Implementar refresh token e expiracao de sessao
