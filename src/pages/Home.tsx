@@ -1,24 +1,33 @@
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { AppButton } from "../components/Button/AppButton";
-import { login } from "../services/login";
+import { login as validateLogin } from "../services/login";
 import { Box, Card, Center, Input } from "@chakra-ui/react";
 import { useContext, useState } from "react";
 import { AppContext } from "../components/AppContext/AppContext";
 
 const Home = () => {
   const [email, setEmail] = useState<string>("");
-  const { setIsLoggedIn } = useContext(AppContext);
+  const [password, setPassword] = useState<string>("");
+  const { isLoggedIn, user, login } = useContext(AppContext);
   const navigate = useNavigate();
 
-  const validateUser = async (email: string) => {
-    const loggedIn = await login(email);
+  if (isLoggedIn && user) {
+    return <Navigate to="/conta-info" replace />;
+  }
 
-    if (!loggedIn) {
+  const handleLogin = async () => {
+    const data = await validateLogin(email, password);
+    if (!data) {
+      alert("Login falhou!");
       return;
     }
+    login({
+      name: data.name,
+      email: data.email,
+      id: data.id,
+    });
 
-    setIsLoggedIn(true);
-    navigate("/conta/1");
+    navigate("/conta-info");
   };
 
   return (
@@ -33,9 +42,13 @@ const Home = () => {
             value={email}
             onChange={(event) => setEmail(event.target.value)}
           />
-          <Input placeholder="password" />
+          <Input
+            placeholder="password"
+            value={password}
+            onChange={(event) => setPassword(event.target.value)}
+          />
           <Center>
-            <AppButton onClick={() => validateUser(email)} />
+            <AppButton onClick={handleLogin} />
           </Center>
         </Card.Body>
       </Card.Root>
